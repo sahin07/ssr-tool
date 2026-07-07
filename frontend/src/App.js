@@ -133,12 +133,18 @@ export default function App() {
       // item.date is "YYYY-MM-DD" -> format to "YYYYMMDD"
       const dateStr = item.date.replace(/-/g, "");
       icsContent += "BEGIN:VEVENT\n";
-      icsContent += `UID:ssa-payment-${dateStr}-${index}@ssachecker.local\n`;
+      icsContent += `UID:ssa-payment-${dateStr}-${index}@checkpaydate.com\n`;
       icsContent += `DTSTAMP:${dateStr}T120000Z\n`;
       icsContent += `DTSTART;VALUE=DATE:${dateStr}\n`;
       icsContent += `DTEND;VALUE=DATE:${dateStr}\n`;
       icsContent += `SUMMARY:${result.benefit_name} Payment\n`;
-      icsContent += `DESCRIPTION:Your scheduled Social Security benefit payment. Check details at our checker portal.\n`;
+      icsContent += `DESCRIPTION:Your scheduled Social Security benefit payment. Estimate from CheckPayDate.com.\n`;
+      // 2-day-before reminder handled by the user's own calendar app
+      icsContent += "BEGIN:VALARM\n";
+      icsContent += "TRIGGER:-P2D\n";
+      icsContent += "ACTION:DISPLAY\n";
+      icsContent += "DESCRIPTION:Social Security payment in 2 days\n";
+      icsContent += "END:VALARM\n";
       icsContent += "END:VEVENT\n";
     });
     
@@ -153,8 +159,8 @@ export default function App() {
     link.click();
     document.body.removeChild(link);
     
-    toast.success("Calendar file downloaded!", {
-      description: "You can import this file into Google Calendar, Outlook, or Apple Calendar.",
+    toast.success("Calendar file with reminders downloaded!", {
+      description: "Import it into Google, Outlook, or Apple Calendar — you'll be alerted 2 days before each payment.",
     });
   };
 
@@ -550,7 +556,7 @@ export default function App() {
                       className={`${fontSizes.buttonHeight} ${contrastClasses.buttonSecondary} flex items-center justify-center space-x-2`}
                     >
                       <Calendar className="h-4 w-4" />
-                      <span>Add to Calendar</span>
+                      <span>Add to Calendar + Reminder</span>
                     </Button>
 
                     <Button
