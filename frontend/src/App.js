@@ -590,6 +590,10 @@ export default function App() {
                     </Button>
                   </div>
 
+                  <p data-testid="reminder-disclaimer-note" className="no-print text-xs text-slate-500 text-center -mt-2">
+                    Reminders are sent by your calendar app (Google, Apple, or Outlook), not by CheckPayDate.
+                  </p>
+
                   <Button
                     variant="outline"
                     onClick={handleShare}
