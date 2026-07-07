@@ -1,0 +1,134 @@
+{
+  "theme": "LIGHT",
+  "archetype": "4 (Swiss & High-Contrast) - Adapted for Government/Trust and Accessibility",
+  "typography": {
+    "font_families": {
+      "headings": "Outfit, sans-serif",
+      "body": "Work Sans, sans-serif",
+      "mono": "IBM Plex Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl font-bold tracking-tight text-slate-900",
+      "h2": "text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900",
+      "h3": "text-xl sm:text-2xl font-semibold text-slate-800",
+      "body": "text-base sm:text-lg text-slate-700 leading-relaxed",
+      "small": "text-sm text-slate-600",
+      "label": "text-base font-semibold text-slate-900 uppercase tracking-wide"
+    },
+    "rules": [
+      "Never use Inter or generic sans for headings.",
+      "Ensure all text has a minimum contrast ratio of 4.5:1 against its background.",
+      "Use left-alignment for paragraphs, inputs, and dense content to maximize readability for older adults.",
+      "Line height must be 'leading-relaxed' for body text to aid vision-impaired reading."
+    ]
+  },
+  "colors": {
+    "background": {
+      "primary": "#FFFFFF",
+      "secondary": "#F8FAFC",
+      "tertiary": "#F1F5F9"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#334155",
+      "disabled": "#94A3B8"
+    },
+    "brand": {
+      "primary": "#005EA2",
+      "primary_hover": "#1A4480",
+      "accent": "#005EA2",
+      "focus_ring": "#F59E0B"
+    },
+    "status": {
+      "success": "#166534",
+      "success_bg": "#DCFCE7",
+      "warning": "#9A3412",
+      "warning_bg": "#FFEDD5",
+      "info": "#1E40AF",
+      "info_bg": "#DBEAFE"
+    },
+    "rules": [
+      "Use #005EA2 (USWDS standard blue) for primary interactive elements.",
+      "Hover states must visibly darken the button and explicitly state the text color.",
+      "Focus states must use ring-2 ring-offset-2 with the #F59E0B (amber) or bright blue focus ring to ensure clear keyboard navigation visibility.",
+      "Do NOT rely on color alone to convey information; use icons alongside text."
+    ]
+  },
+  "spacing_and_layout": {
+    "generous_spacing": true,
+    "scale": {
+      "section_padding": "py-16 md:py-24",
+      "card_padding": "p-6 md:p-8",
+      "gap_standard": "gap-6",
+      "gap_large": "gap-12"
+    },
+    "border_radius": {
+      "card": "rounded-2xl",
+      "button": "rounded-xl",
+      "input": "rounded-lg"
+    },
+    "shadows": {
+      "card_base": "shadow-sm border border-slate-200",
+      "card_hover": "shadow-md border-slate-300 transition-shadow duration-200"
+    },
+    "rules": [
+      "Mobile-first responsive grids: start with grid-cols-1.",
+      "Keep containers constrained to max-w-5xl for optimal reading width.",
+      "Ensure interactive touch targets are a minimum of 44px in height.",
+      "Inputs and forms must have visible 1px borders, never relying purely on background color."
+    ]
+  },
+  "components_and_interactions": {
+    "ui_library": "shadcn/ui",
+    "icons_library": "lucide-react",
+    "required_components": [
+      "Button",
+      "Card",
+      "Input",
+      "Select",
+      "Accordion",
+      "Label",
+      "Table (optional, if using table layout for schedules)"
+    ],
+    "specific_guidelines": {
+      "buttons": "Large touch targets (h-12 or h-14). Use solid primary color for main CTA, outline for secondary actions (Print, Download).",
+      "forms": "Clear explicit labels above inputs. Large text (text-base or text-lg).",
+      "accordion": "Use for FAQ section. Ensure the click target spans the entire row, not just the text or icon.",
+      "navigation": "Sticky desktop header (z-50) with glassmorphism (bg-white/90 backdrop-blur-md) and a solid bottom border (border-slate-200).",
+      "testing": "MANDATORY: Every interactive element must have a data-testid attribute (e.g., data-testid='calculate-button')."
+    }
+  },
+  "media": {
+    "images": [
+      {
+        "id": "hero_illustration",
+        "url": "https://images.unsplash.com/photo-1629359312886-3c03cd9287d2",
+        "alt": "Minimalist calendar representation",
+        "placement": "Hero section alongside the title, or as a visual anchor in the 'How it works' section."
+      },
+      {
+        "id": "informational_photo",
+        "url": "https://images.pexels.com/photos/6248446/pexels-photo-6248446.jpeg",
+        "alt": "Elderly woman smiling while using a tablet at home",
+        "placement": "Information section explaining how to use the portal, establishing trust and approachability."
+      }
+    ],
+    "rules": [
+      "Never use placeholder image URLs.",
+      "Images must have descriptive alt text for accessibility.",
+      "Apply rounded corners (rounded-2xl) to images to match the design system."
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Build a single-page React application using Tailwind CSS and shadcn/ui components.",
+    "Install 'lucide-react' for icons (Calendar, Clock, CheckCircle, Info, Download, Printer, Copy, Share).",
+    "Install and import 'Outfit' and 'Work Sans' fonts via Google Fonts in the HTML/CSS.",
+    "Structure the page: Header -> Hero -> Calculator Form Card -> Result Card -> Upcoming Payments -> Information/How It Works -> FAQ Accordion -> Disclaimer Footer.",
+    "For the calculator, use Shadcn Select/Input for 'Birth Date' and 'Benefit Type'. No functional logic is required, just mock the UI states.",
+    "Implement the Result Card prominently with a mocked countdown and large bold text displaying the 'Next Payment Date'.",
+    "Include utility action buttons (Add to Calendar, Print, Share) styled as secondary outlines beneath the result.",
+    "Ensure all text color explicitly overrides any Tailwind defaults to guarantee WCAG AA contrast (e.g., text-slate-900 instead of text-gray-800).",
+    "Apply 'data-testid' to all buttons, inputs, links, and accordion triggers.",
+    "Do not use complex animations; use simple transitions (duration-200) for hover/focus states to respect older adults' usability needs."
+  ]
+}
