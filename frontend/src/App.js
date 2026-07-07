@@ -91,14 +91,13 @@ export default function App() {
   }, [result]);
 
   // Handle calculation submission
-  const handleCalculate = async (e) => {
-    e.preventDefault();
+  const runCalculation = async (bDate, bType) => {
     setIsLoading(true);
-    
+
     try {
       const response = await axios.post(`${API}/calculate`, {
-        birth_date: birthDate,
-        benefit_type: benefitType
+        birth_date: bDate,
+        benefit_type: bType
       });
 
       if (response.data) {
@@ -122,6 +121,34 @@ export default function App() {
       setIsLoading(false);
     }
   };
+
+  const handleCalculate = async (e) => {
+    e.preventDefault();
+    await runCalculation(birthDate, benefitType);
+  };
+
+  // Pre-fill and auto-calculate from a shareable link (?type=standard&day=15)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const day = params.get("day");
+    const validTypes = ["standard", "ssi", "pre_1997"];
+
+    if (type && validTypes.includes(type)) {
+      let bDate = birthDate;
+      if (type === "standard" && day) {
+        const d = parseInt(day, 10);
+        if (d >= 1 && d <= 31) {
+          bDate = `1960-01-${String(d).padStart(2, "0")}`;
+          setBirthDate(bDate);
+        }
+      }
+      setBenefitType(type);
+      runCalculation(bDate, type);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   // 100% Client-Side Calendar (.ics) Generation
   const handleAddToCalendar = () => {
@@ -228,24 +255,34 @@ export default function App() {
     window.print();
   };
 
+  // Build a bookmarkable/shareable link that pre-fills this exact result
+  const buildShareUrl = () => {
+    const day = (birthDate.split("-")[2] || "15").replace(/^0+/, "") || "15";
+    const base = `${window.location.origin}${window.location.pathname}`;
+    return benefitType === "standard"
+      ? `${base}?type=standard&day=${day}`
+      : `${base}?type=${benefitType}`;
+  };
+
   // Share schedule
   const handleShare = () => {
     if (!result) return;
-    
-    const shareText = `My next Social Security payment is on ${result.formatted_next_payment_date}! Calculate yours here: ${window.location.href}`;
-    
+
+    const shareUrl = buildShareUrl();
+    const shareText = `My next Social Security payment is on ${result.formatted_next_payment_date}! Check yours here: ${shareUrl}`;
+
     if (navigator.share) {
       navigator.share({
-        title: "Social Security Payment Tracker",
+        title: "CheckPayDate.com — Social Security Payment Date Checker",
         text: shareText,
-        url: window.location.href,
+        url: shareUrl,
       }).catch(err => console.log(err));
     } else {
       try {
         navigator.clipboard.writeText(shareText)
           .then(() => {
             toast.success("Sharing link copied to clipboard!", {
-              description: "Paste and share it with your friends or family.",
+              description: "This link re-opens your exact result. Paste and share it with friends or family.",
             });
           })
           .catch(err => {
@@ -317,7 +354,13 @@ export default function App() {
 
       {/* MAIN LAYOUT */}
       <main className="max-w-5xl mx-auto px-4 py-8 md:py-16 space-y-12">
-        
+
+        {/* PRINT-ONLY HEADER */}
+        <div className="print-header">
+          <span className="font-headings font-extrabold text-lg">CheckPayDate.com — Payment Schedule</span>
+          <span className="text-sm">Generated {new Date().toLocaleDateString()}</span>
+        </div>
+
         {/* HERO SECTION */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center no-print">
           <div className="md:col-span-7 space-y-6">
@@ -822,7 +865,7 @@ export default function App() {
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="faq-5" className="border-none">
+                <AccordionItem value="faq-5" className="border-b border-slate-200">
                   <AccordionTrigger 
                     data-testid="faq-accordion-trigger-4"
                     className={`${fontSizes.h3} text-slate-900 py-4 hover:no-underline font-semibold`}
@@ -831,6 +874,42 @@ export default function App() {
                   </AccordionTrigger>
                   <AccordionContent className={`${fontSizes.body} text-slate-600 pb-4`}>
                     Yes. Social Security Disability Insurance (SSDI) and Survivors benefits follow the exact same birth day schedule rules (Wednesdays) as Retirement benefits, as long as the claim was filed after May 1997.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-6" className="border-b border-slate-200">
+                  <AccordionTrigger 
+                    data-testid="faq-accordion-trigger-5"
+                    className={`${fontSizes.h3} text-slate-900 py-4 hover:no-underline font-semibold`}
+                  >
+                    Is CheckPayDate.com an official government website?
+                  </AccordionTrigger>
+                  <AccordionContent className={`${fontSizes.body} text-slate-600 pb-4`}>
+                    No. CheckPayDate.com is a free, independent scheduling tool and is not affiliated with, or endorsed by, the Social Security Administration or any government agency. We show schedule estimates based on published SSA payment rules. For your exact deposit date, use your &quot;my Social Security&quot; account at ssa.gov or call 1-800-772-1213.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-7" className="border-b border-slate-200">
+                  <AccordionTrigger 
+                    data-testid="faq-accordion-trigger-6"
+                    className={`${fontSizes.h3} text-slate-900 py-4 hover:no-underline font-semibold`}
+                  >
+                    Do you collect my Social Security number or personal records?
+                  </AccordionTrigger>
+                  <AccordionContent className={`${fontSizes.body} text-slate-600 pb-4`}>
+                    Never. We only use your day of birth to identify which Wednesday of the month applies to you, and we do not ask for your name, SSN, or any account details. This is a public scheduling calculator, not a people search or background check.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-8" className="border-none">
+                  <AccordionTrigger 
+                    data-testid="faq-accordion-trigger-7"
+                    className={`${fontSizes.h3} text-slate-900 py-4 hover:no-underline font-semibold`}
+                  >
+                    Can I get a reminder before my payment arrives?
+                  </AccordionTrigger>
+                  <AccordionContent className={`${fontSizes.body} text-slate-600 pb-4`}>
+                    Yes. After you check your dates, click &quot;Add to Calendar + Reminder&quot; to download a calendar file that includes an alert 2 days before every payment. The reminder is delivered by your own calendar app (Google, Apple, or Outlook) — CheckPayDate does not send emails or texts.
                   </AccordionContent>
                 </AccordionItem>
 
