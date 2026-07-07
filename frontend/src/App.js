@@ -15,9 +15,6 @@ import {
   Phone, 
   ChevronDown,
   RefreshCw,
-  Eye,
-  Type,
-  Check,
   Shield,
   HelpCircle
 } from "lucide-react";
@@ -35,8 +32,8 @@ const API = `${BACKEND_URL}/api`;
 
 export default function App() {
   // Theme & Accessibility States
-  const [largeText, setLargeText] = useState(false);
-  const [highContrast, setHighContrast] = useState(false);
+  const [largeText] = useState(false);
+  const [highContrast] = useState(true);
 
   // Form States
   const [birthDate, setBirthDate] = useState("1960-04-15");
@@ -302,43 +299,12 @@ export default function App() {
             </div>
             <div>
               <span className={`font-headings font-extrabold text-xl tracking-tight ${contrastClasses.textPrimary}`}>
-                SSA Date Tracker
+                CheckPayDate.com
               </span>
               <span className="block text-xs uppercase font-bold tracking-wider text-[#005EA2]">
                 Informational Aid
               </span>
             </div>
-          </div>
-
-          {/* Accessibility Controls Toolbar */}
-          <div className="flex items-center space-x-2" role="toolbar" aria-label="Accessibility options">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setLargeText(!largeText)}
-              data-testid="accessibility-large-text-toggle"
-              className={`flex items-center space-x-1 sm:space-x-2 ${fontSizes.buttonHeight} border border-slate-300`}
-              aria-pressed={largeText}
-              aria-label="Toggle larger text size for readability"
-            >
-              <Type className="h-4 w-4" />
-              <span className="hidden md:inline font-semibold">Larger Text</span>
-              {largeText && <Check className="h-3 w-3 text-emerald-600 font-bold ml-1" />}
-            </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setHighContrast(!highContrast)}
-              data-testid="accessibility-high-contrast-toggle"
-              className={`flex items-center space-x-1 sm:space-x-2 ${fontSizes.buttonHeight} border border-slate-300`}
-              aria-pressed={highContrast}
-              aria-label="Toggle high contrast colors for visual clarity"
-            >
-              <Eye className="h-4 w-4" />
-              <span className="hidden md:inline font-semibold">High Contrast</span>
-              {highContrast && <Check className="h-3 w-3 text-emerald-600 font-bold ml-1" />}
-            </Button>
           </div>
         </div>
       </header>
@@ -930,7 +896,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
-              <span className="font-headings font-extrabold text-lg tracking-tight">SSA Payment Tracker</span>
+              <span className="font-headings font-extrabold text-lg tracking-tight">CheckPayDate.com</span>
             </div>
             <p className="text-slate-400">
               An independent, privacy-secure utility helping retirees, beneficiaries, and families plan budgets easily and clearly.
@@ -953,7 +919,7 @@ export default function App() {
               Calculation logs are tracked securely without storing full user identities. Your confidential information is safe with our server security standards.
             </p>
             <p className="text-xs text-slate-500 pt-2">
-              © {new Date().getFullYear()} SSA Payment Tracker. All Rights Reserved. Not a Government Entity.
+              © {new Date().getFullYear()} CheckPayDate.com. All Rights Reserved. Not a Government Entity.
             </p>
           </div>
         </div>
