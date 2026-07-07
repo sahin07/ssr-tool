@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "@/App.css";
 import axios from "axios";
 import { 
@@ -1003,9 +1004,20 @@ export default function App() {
           </div>
 
           <div className="space-y-3">
-            <span className="block font-bold text-xs uppercase tracking-wider text-slate-400">Privacy & Terms</span>
-            <p className="text-slate-400">
-              Calculation logs are tracked securely without storing full user identities. Your confidential information is safe with our server security standards.
+            <span className="block font-bold text-xs uppercase tracking-wider text-slate-400">Privacy &amp; Terms</span>
+            <ul className="space-y-2 text-slate-300">
+              <li>
+                <Link to="/privacy-policy" data-testid="footer-privacy-link" className="hover:text-white hover:underline font-semibold">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link to="/terms-and-conditions" data-testid="footer-terms-link" className="hover:text-white hover:underline font-semibold">Terms &amp; Conditions</Link>
+              </li>
+              <li>
+                <Link to="/contact" data-testid="footer-contact-link" className="hover:text-white hover:underline font-semibold">Contact Us</Link>
+              </li>
+            </ul>
+            <p className="text-slate-400 pt-1">
+              No accounts and no payment data collected. This is a scheduling estimate tool, not a government portal.
             </p>
             <p className="text-xs text-slate-500 pt-2">
               © {new Date().getFullYear()} CheckPayDate.com. All Rights Reserved. Not a Government Entity.
