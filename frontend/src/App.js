@@ -380,9 +380,9 @@ export default function App() {
             <div className="relative w-full max-w-sm">
               <div className="absolute inset-0 bg-[#005EA2] opacity-10 blur-2xl rounded-full"></div>
               <img 
-                src="https://images.unsplash.com/photo-1629359312886-3c03cd9287d2" 
-                alt="Calendar schedule and checklist visualization" 
-                className="w-full h-auto object-cover rounded-2xl border border-slate-200 shadow-md relative z-10 aspect-[4/3]"
+                src="https://static.prod-images.emergentagent.com/jobs/1b455353-8d86-4d03-8529-c794013da3d7/images/29d232089dbaba701e73ef7a447def0d3bdc83bac84daba9c937fb554bfb29f2.png" 
+                alt="Calendar with next payment date circled and a deposit coin icon" 
+                className="w-full h-auto object-contain rounded-2xl border border-slate-200 shadow-md relative z-10 bg-white aspect-square"
               />
             </div>
           </div>
@@ -458,6 +458,24 @@ export default function App() {
                   </div>
                 )}
 
+                {/* Fixed-date benefit info (SSI / Pre-1997 hide birthday) */}
+                {benefitType === "ssi" && (
+                  <div data-testid="ssi-info-note" className="flex items-start space-x-2 p-4 bg-blue-50 border border-blue-100 rounded-xl">
+                    <Info className="h-5 w-5 text-[#005EA2] shrink-0 mt-0.5" />
+                    <p className={`${fontSizes.small} text-blue-950 font-medium`}>
+                      SSI is paid on the <strong>1st of each month</strong> for everyone, so no birth date is needed. If the 1st falls on a weekend or holiday, payment moves to the prior business day.
+                    </p>
+                  </div>
+                )}
+
+                {benefitType === "pre_1997" && (
+                  <div data-testid="pre-1997-info-note" className="flex items-start space-x-2 p-4 bg-blue-50 border border-blue-100 rounded-xl">
+                    <Info className="h-5 w-5 text-[#005EA2] shrink-0 mt-0.5" />
+                    <p className={`${fontSizes.small} text-blue-950 font-medium`}>
+                      Benefits started before May 1997 are paid on the <strong>3rd of each month</strong> for everyone, so no birth date is needed. If the 3rd falls on a weekend or holiday, payment moves to the prior business day.
+                    </p>
+                  </div>
+                )}
                 {/* Submit Button */}
                 <Button 
                   type="submit"
