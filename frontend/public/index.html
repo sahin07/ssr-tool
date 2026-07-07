@@ -3,8 +3,89 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
+        <meta name="theme-color" content="#005EA2" />
+        <meta name="description" content="Free Social Security payment date checker. See when your benefit is scheduled based on official SSA payment rules — for retirement, SSDI, survivors, SSI, and pre-1997 claims. Not affiliated with the SSA." />
+        <link rel="canonical" href="https://checkpaydate.com/" />
+
+        <!-- Open Graph / social -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="CheckPayDate.com" />
+        <meta property="og:title" content="Social Security Payment Date Checker" />
+        <meta property="og:description" content="See when your Social Security benefit is scheduled — based on official SSA payment rules. Free, private, no account needed." />
+        <meta property="og:url" content="https://checkpaydate.com/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Social Security Payment Date Checker" />
+        <meta name="twitter:description" content="See when your Social Security benefit is scheduled — based on official SSA payment rules." />
+
+        <!-- Structured data: WebApplication + Organization -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "CheckPayDate.com — Social Security Payment Date Checker",
+          "url": "https://checkpaydate.com/",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any (web browser)",
+          "browserRequirements": "Requires JavaScript",
+          "description": "Free tool that estimates Social Security payment dates based on official SSA payment rules for retirement, SSDI, survivors, SSI, and pre-1997 claims.",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "CheckPayDate.com",
+            "url": "https://checkpaydate.com/"
+          }
+        }
+        </script>
+
+        <!-- Structured data: FAQPage (mirrors on-page FAQ) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What happens if my payment date falls on a weekend or federal holiday?",
+              "acceptedAnswer": { "@type": "Answer", "text": "If your scheduled payment date falls on a Saturday, Sunday, or a federal holiday, your funds are deposited on the immediate preceding business day. For example, if the 1st of the month lands on a Sunday, your SSI payment is usually deposited on the Friday before." }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is my payment date different from my spouse or neighbor?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Standard Social Security payment dates are determined by your day of birth. Born 1st-10th = second Wednesday, 11th-20th = third Wednesday, 21st-31st = fourth Wednesday. SSI and pre-May-1997 claims follow different fixed-date rules." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I sign up for direct deposit?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sign up through your online my Social Security account at ssa.gov, or call the Social Security Administration toll-free at 1-800-772-1213 (TTY 1-800-325-0778)." }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I do if my payment is late or missing?",
+              "acceptedAnswer": { "@type": "Answer", "text": "The SSA advises waiting three business days before reporting a missing or delayed payment. If three days have passed, contact your bank first, then call the SSA at 1-800-772-1213." }
+            },
+            {
+              "@type": "Question",
+              "name": "Does my birth date affect SSDI and Survivors benefits?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. SSDI and Survivors benefits follow the same birth-day Wednesday schedule as Retirement benefits, as long as the claim was filed after May 1997." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is CheckPayDate.com an official government website?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. CheckPayDate.com is a free, independent scheduling tool and is not affiliated with or endorsed by the Social Security Administration. For your exact deposit date, use your my Social Security account at ssa.gov or call 1-800-772-1213." }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you collect my Social Security number or personal records?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Never. We only use your day of birth to identify which Wednesday of the month applies. We do not ask for your name, SSN, or account details. This is a public scheduling calculator, not a people search." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I get a reminder before my payment arrives?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Click Add to Calendar + Reminder to download a calendar file with an alert 2 days before every payment. The reminder is delivered by your own calendar app (Google, Apple, or Outlook); CheckPayDate does not send emails or texts." }
+            }
+          ]
+        }
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
@@ -21,7 +102,7 @@
         work correctly both with client-side routing and a non-root public URL.
         Learn how to configure a non-root public URL by running `npm run build`.
         -->
-        <title>Emergent | Fullstack App</title>
+        <title>Social Security Payment Date Checker — CheckPayDate.com</title>
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
     </head>
