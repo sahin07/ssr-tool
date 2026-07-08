@@ -86,5 +86,13 @@ Domain: **CheckPayDate.com**
 - Env: frontend uses REACT_APP_BACKEND_URL; backend uses MONGO_URL + DB_NAME. All backend routes prefixed /api. Backend bind 0.0.0.0:8001, frontend 3000 (supervisor-managed).
 - NOTE: current tool DOES use the FastAPI backend for calculation + stats. If a fully static/no-backend build is ever desired, calculation logic would need to be ported client-side.
 
+## 10b. Launch-Polish Pass (June 2026)
+- Added /public/robots.txt (Allow all + Sitemap directive) and /public/sitemap.xml (homepage + 5 country + 3 legal URLs).
+- Accessibility: skip-to-content link + <main id="main-content"> on homepage and LegalLayout; benefit-type select labeled via htmlFor/id.
+- Performance/CWV: hero img eager + fetchPriority=high + explicit width/height; secondary img loading=lazy.
+- Mobile fix: header no longer overflows at 390px (brand subline hidden <sm, compact icon-only country-nav trigger <sm).
+- Verified: iteration_4 (backend 12/12, frontend ~90% w/ 3 issues) -> fixed -> iteration_5 (100%, mobile scrollWidth=clientWidth=390, no console warnings).
+- SEO already in index.html: title, meta description, canonical, OG, Twitter, JSON-LD WebApplication + FAQPage.
+
 ## 11. Last Updated
 June 2026 — v1 launch-ready (core checker, 3 benefit types, calendar+reminder, share links, print, legal pages, JSON-LD SEO).
