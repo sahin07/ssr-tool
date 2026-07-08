@@ -334,6 +334,13 @@ export default function App() {
   return (
     <div className={`min-h-screen font-body ${contrastClasses.bg}`}>
       <Toaster position="top-center" richColors />
+      <a
+        href="#main-content"
+        data-testid="skip-to-content-link"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[#005EA2] focus:text-white focus:rounded-lg focus:font-bold"
+      >
+        Skip to main content
+      </a>
 
       {/* STICKY ACCESSIBLE HEADER */}
       <header className={`sticky top-0 z-50 transition-all ${contrastClasses.headerBg} no-print`}>
@@ -356,7 +363,7 @@ export default function App() {
       </header>
 
       {/* MAIN LAYOUT */}
-      <main className="max-w-5xl mx-auto px-4 py-8 md:py-16 space-y-12">
+      <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 md:py-16 space-y-12">
 
         {/* PRINT-ONLY HEADER */}
         <div className="print-header">
@@ -400,6 +407,11 @@ export default function App() {
               <img 
                 src="https://static.prod-images.emergentagent.com/jobs/1b455353-8d86-4d03-8529-c794013da3d7/images/29d232089dbaba701e73ef7a447def0d3bdc83bac84daba9c937fb554bfb29f2.png" 
                 alt="Calendar with next payment date circled and a deposit coin icon" 
+                width="600"
+                height="600"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
                 className="w-full h-auto object-contain rounded-2xl border border-slate-200 shadow-md relative z-10 bg-white aspect-square"
               />
             </div>
@@ -790,6 +802,8 @@ export default function App() {
               <img 
                 src="https://images.pexels.com/photos/6248446/pexels-photo-6248446.jpeg" 
                 alt="Older adult checking calendar dates on a tablet device at home" 
+                loading="lazy"
+                decoding="async"
                 className="rounded-xl object-cover w-full h-auto aspect-video md:aspect-[4/3] border border-slate-200"
               />
             </div>

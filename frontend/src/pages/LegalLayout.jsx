@@ -11,6 +11,12 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-body">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[#005EA2] focus:text-white focus:rounded-lg focus:font-bold"
+      >
+        Skip to main content
+      </a>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b-2 border-black">
         <div className="max-w-3xl mx-auto px-4 h-20 flex items-center justify-between">
@@ -38,7 +44,7 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
       </header>
 
       {/* Content */}
-      <main className="max-w-3xl mx-auto px-4 py-10 md:py-16">
+      <main id="main-content" className="max-w-3xl mx-auto px-4 py-10 md:py-16">
         <h1 className="text-3xl sm:text-4xl font-headings font-extrabold tracking-tight mb-2">{title}</h1>
         {lastUpdated && (
           <p className="text-sm text-slate-500 mb-8">Last updated: {lastUpdated}</p>
