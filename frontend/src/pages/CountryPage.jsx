@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LegalLayout } from "./LegalLayout";
 import { COUNTRY_DATA } from "./countryData";
+import { useSeo } from "./useSeo";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { AlertTriangle, Phone, ExternalLink, ArrowRight, Info } from "lucide-react";
 
 const UK_MAP = [
@@ -15,10 +17,7 @@ const UK_MAP = [
 const UkSelector = () => {
   const [digits, setDigits] = useState("");
   const n = parseInt(digits, 10);
-  const match =
-    digits.length === 2 && !isNaN(n)
-      ? UK_MAP[Math.min(4, Math.floor(n / 20))]
-      : null;
+  const match = digits.length === 2 && !isNaN(n) ? UK_MAP[Math.min(4, Math.floor(n / 20))] : null;
 
   return (
     <div className="p-6 border-2 border-black rounded-2xl bg-slate-50 not-prose" data-testid="uk-ni-selector">
@@ -37,8 +36,7 @@ const UkSelector = () => {
       />
       {match && (
         <p data-testid="uk-ni-result" className="mt-4 text-lg text-slate-900">
-          Your State Pension is paid on a{" "}
-          <strong className="text-[#005EA2]">{match.day}</strong>, every 4 weeks.
+          Your State Pension is paid on a <strong className="text-[#005EA2]">{match.day}</strong>, every 4 weeks.
         </p>
       )}
     </div>
@@ -52,12 +50,38 @@ const H2 = ({ children }) => (
 export default function CountryPage({ slug }) {
   const data = COUNTRY_DATA[slug];
 
-  useEffect(() => {
-    if (data) document.title = data.title;
-    return () => {
-      document.title = "Social Security Payment Date Checker — CheckPayDate.com";
-    };
-  }, [data]);
+  const jsonLd = data
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: data.heading,
+          url: data.canonical,
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any (web browser)",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          publisher: { "@type": "Organization", name: "CheckPayDate.com", url: "https://checkpaydate.com/" },
+        },
+      ]
+    : [];
+  if (data?.faqs?.length) {
+    jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: data.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+
+  useSeo({
+    title: data?.title,
+    description: data?.description || data?.intro,
+    canonical: data?.canonical,
+    jsonLd,
+  });
 
   if (!data) {
     return (
@@ -74,7 +98,6 @@ export default function CountryPage({ slug }) {
 
       {data.interactive === "uk" && <UkSelector />}
 
-      {/* Schedule table */}
       {data.scheduleRows && (
         <>
           <H2>{data.scheduleTitle}</H2>
@@ -91,9 +114,7 @@ export default function CountryPage({ slug }) {
                 {data.scheduleRows.map((row, i) => (
                   <tr key={i} className="hover:bg-slate-50">
                     {row.map((cell, j) => (
-                      <td key={j} className={`p-4 text-sm md:text-base ${j === 0 ? "font-bold text-slate-900" : "text-slate-700"}`}>
-                        {cell}
-                      </td>
+                      <td key={j} className={`p-4 text-sm md:text-base ${j === 0 ? "font-bold text-slate-900" : "text-slate-700"}`}>{cell}</td>
                     ))}
                   </tr>
                 ))}
@@ -103,15 +124,13 @@ export default function CountryPage({ slug }) {
         </>
       )}
 
-      {/* How it works */}
-      <H2>How payment dates work</H2>
+      <H2>How does it work?</H2>
       <ul className="list-disc pl-5 space-y-2">
         {data.howItWorks.map((item, i) => (
           <li key={i}>{item}</li>
         ))}
       </ul>
 
-      {/* Amounts */}
       {data.amounts && (
         <>
           <H2>Current amounts</H2>
@@ -126,7 +145,24 @@ export default function CountryPage({ slug }) {
         </>
       )}
 
-      {/* Official resource */}
+      {data.faqs && (
+        <>
+          <H2>Frequently Asked Questions</H2>
+          <div className="not-prose" data-testid="country-faq">
+            <Accordion type="single" collapsible className="w-full border-2 border-black rounded-2xl bg-white px-4">
+              {data.faqs.map((f, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className={i === data.faqs.length - 1 ? "border-none" : "border-b border-slate-200"}>
+                  <AccordionTrigger data-testid={`country-faq-trigger-${i}`} className="text-left text-base sm:text-lg font-semibold text-slate-900 py-4 hover:no-underline">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base text-slate-600 pb-4">{f.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </>
+      )}
+
       <div className="not-prose p-6 border border-slate-200 rounded-2xl bg-slate-50 space-y-2">
         <h3 className="text-lg font-headings font-bold text-slate-900">Official source</h3>
         <a href={data.official.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-[#005EA2] font-semibold hover:underline">
@@ -139,14 +175,12 @@ export default function CountryPage({ slug }) {
         )}
       </div>
 
-      {/* Related link */}
       {data.related && (
         <Link to={data.related.to} data-testid="country-related-link" className="not-prose inline-flex items-center text-[#005EA2] font-semibold hover:underline">
           {data.related.label} <ArrowRight className="h-4 w-4 ml-1" />
         </Link>
       )}
 
-      {/* Disclaimer */}
       <div className="not-prose flex items-start gap-3 p-5 border-l-4 border-amber-500 bg-amber-50 rounded-r-xl">
         <AlertTriangle className="h-6 w-6 text-amber-600 shrink-0 mt-0.5" />
         <p className="text-sm text-amber-900">
@@ -154,7 +188,6 @@ export default function CountryPage({ slug }) {
         </p>
       </div>
 
-      {/* Sources */}
       <div className="not-prose">
         <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-2">
           <Info className="h-4 w-4" /> Sources

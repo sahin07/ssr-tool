@@ -1,11 +1,17 @@
 import React from "react";
 import { LegalLayout } from "./LegalLayout";
+import { useSeo } from "./useSeo";
 
 const H2 = ({ children }) => (
   <h2 className="text-xl sm:text-2xl font-headings font-bold text-slate-900 pt-4">{children}</h2>
 );
 
 export default function PrivacyPolicy() {
+  useSeo({
+    title: "Privacy Policy | CheckPayDate.com",
+    description: "How CheckPayDate.com handles your data: no accounts, no SSN or bank details collected, and how analytics and cookies are used.",
+    canonical: "https://checkpaydate.com/privacy-policy",
+  });
   return (
     <LegalLayout title="Privacy Policy" lastUpdated="June 2026">
       <p data-testid="privacy-intro">

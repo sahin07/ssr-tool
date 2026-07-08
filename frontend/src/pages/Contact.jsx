@@ -1,8 +1,14 @@
 import React from "react";
 import { LegalLayout } from "./LegalLayout";
+import { useSeo } from "./useSeo";
 import { Mail } from "lucide-react";
 
 export default function Contact() {
+  useSeo({
+    title: "Contact Us | CheckPayDate.com",
+    description: "Contact CheckPayDate.com by email, plus official Social Security Administration contact details for benefit questions.",
+    canonical: "https://checkpaydate.com/contact",
+  });
   return (
     <LegalLayout title="Contact Us" lastUpdated={null}>
       <p data-testid="contact-intro">

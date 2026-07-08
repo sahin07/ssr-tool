@@ -1,11 +1,17 @@
 import React from "react";
 import { LegalLayout } from "./LegalLayout";
+import { useSeo } from "./useSeo";
 
 const H2 = ({ children }) => (
   <h2 className="text-xl sm:text-2xl font-headings font-bold text-slate-900 pt-4">{children}</h2>
 );
 
 export default function Terms() {
+  useSeo({
+    title: "Terms and Conditions | CheckPayDate.com",
+    description: "Terms of use for CheckPayDate.com — payment dates are estimates only, not affiliated with the SSA, with limitation of liability.",
+    canonical: "https://checkpaydate.com/terms-and-conditions",
+  });
   return (
     <LegalLayout title="Terms and Conditions" lastUpdated="June 2026">
       <p data-testid="terms-intro">

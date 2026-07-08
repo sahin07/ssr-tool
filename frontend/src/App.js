@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { HeaderCountryNav } from "@/pages/CountryNav";
+import { SiteHeader } from "@/pages/SiteHeader";
 import { SiteFooter } from "@/pages/SiteFooter";
 import "@/App.css";
 import axios from "axios";
@@ -342,25 +342,8 @@ export default function App() {
         Skip to main content
       </a>
 
-      {/* STICKY ACCESSIBLE HEADER */}
-      <header className={`sticky top-0 z-50 transition-all ${contrastClasses.headerBg} no-print`}>
-        <div className="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className={`p-2 bg-[#005EA2] text-white rounded-lg`}>
-              <Calendar className="h-6 w-6" aria-hidden="true" />
-            </div>
-            <div>
-              <span className={`font-headings font-extrabold text-lg sm:text-xl tracking-tight ${contrastClasses.textPrimary}`}>
-                CheckPayDate.com
-              </span>
-              <span className="hidden sm:block text-xs uppercase font-bold tracking-wider text-[#005EA2]">
-                Informational Aid
-              </span>
-            </div>
-          </div>
-          <HeaderCountryNav />
-        </div>
-      </header>
+      {/* SHARED SITE HEADER */}
+      <SiteHeader />
 
       {/* MAIN LAYOUT */}
       <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 md:py-16 space-y-12">

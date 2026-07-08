@@ -34,6 +34,8 @@ export const COUNTRY_DATA = {
     country: "Canada",
     title: "Canada CPP Payment Dates 2026 | CheckPayDate.com",
     heading: "Canada CPP Payment Dates 2026",
+    description:
+      "Canada CPP payment dates for 2026. See the full monthly Service Canada deposit schedule for CPP retirement, disability and survivor benefits.",
     canonical: "https://checkpaydate.com/canada/cpp-payment-dates/",
     intro:
       "Canada Pension Plan (CPP) retirement, disability, and survivor benefits are paid once a month by Service Canada. CPP and Old Age Security (OAS) share the same payment dates each month.",
@@ -45,6 +47,11 @@ export const COUNTRY_DATA = {
       "With direct deposit, funds are generally available on the payment date; paper cheques can take a few extra days.",
       "If a payment date falls on a weekend or federal holiday, the payment is issued on the preceding business day.",
       "CPP and OAS are deposited on the same date each month.",
+    ],
+    faqs: [
+      { q: "When is CPP paid in 2026?", a: "CPP is paid monthly near the end of each month — for example January 28, February 25 and December 22, 2026. See the full table above." },
+      { q: "Are CPP and OAS paid on the same day?", a: "Yes. Canada Pension Plan and Old Age Security are deposited on the same date each month." },
+      { q: "What happens if my CPP date is a weekend or holiday?", a: "If the scheduled date falls on a weekend or federal holiday, payment is issued on the preceding business day." },
     ],
     official: {
       name: "Service Canada — Benefits payment dates",
@@ -63,6 +70,8 @@ export const COUNTRY_DATA = {
     country: "Canada",
     title: "Canada OAS Payment Dates 2026 | CheckPayDate.com",
     heading: "Canada OAS Payment Dates 2026",
+    description:
+      "Canada OAS payment dates for 2026. Full monthly Old Age Security (and GIS) deposit schedule from Service Canada.",
     canonical: "https://checkpaydate.com/canada/oas-payment-dates/",
     intro:
       "Old Age Security (OAS), including the Guaranteed Income Supplement (GIS), is paid once a month by Service Canada. OAS is deposited on the same date as Canada Pension Plan (CPP) benefits.",
@@ -74,6 +83,11 @@ export const COUNTRY_DATA = {
       "With direct deposit, funds are generally available on the payment date.",
       "If a payment date falls on a weekend or federal holiday, the payment is issued on the preceding business day.",
       "OAS and CPP are deposited on the same date each month.",
+    ],
+    faqs: [
+      { q: "When is OAS paid in 2026?", a: "OAS is paid monthly near the end of each month — the same dates as CPP, such as January 28 and December 22, 2026." },
+      { q: "Is the GIS paid with OAS?", a: "Yes. The Guaranteed Income Supplement (GIS) is paid together with your OAS on the same date." },
+      { q: "What if the OAS date falls on a holiday?", a: "If the date lands on a weekend or federal holiday, payment is issued on the preceding business day." },
     ],
     official: {
       name: "Service Canada — Benefits payment dates",
@@ -91,6 +105,8 @@ export const COUNTRY_DATA = {
     country: "United Kingdom",
     title: "UK State Pension Payment Dates 2026 | CheckPayDate.com",
     heading: "UK State Pension Payment Dates 2026",
+    description:
+      "UK State Pension payment dates 2026. Find your payment day from your National Insurance number — paid every 4 weeks.",
     canonical: "https://checkpaydate.com/uk/state-pension-payment-dates/",
     intro:
       "The UK State Pension is paid every 4 weeks in arrears. Your payment day of the week is set by the last two digits of your National Insurance (NI) number — not by a fixed date of the month.",
@@ -114,6 +130,11 @@ export const COUNTRY_DATA = {
       { label: "Qualifying years for full amount", value: "35 years of NI contributions" },
       { label: "Minimum for any new State Pension", value: "10 qualifying years" },
     ],
+    faqs: [
+      { q: "How often is the UK State Pension paid?", a: "Every 4 weeks in arrears — 13 payments a year, always on the same day of the week." },
+      { q: "How is my payment day decided?", a: "By the last two digits of your National Insurance number: 00-19 Monday, 20-39 Tuesday, 40-59 Wednesday, 60-79 Thursday, 80-99 Friday." },
+      { q: "What happens on a bank holiday?", a: "If your payment day is a UK bank holiday, you are usually paid earlier, on the previous working day." },
+    ],
     official: {
       name: "GOV.UK — State Pension: when you're paid",
       url: "https://www.gov.uk/state-pension/when-youre-paid",
@@ -130,6 +151,8 @@ export const COUNTRY_DATA = {
     country: "Australia",
     title: "Australia Centrelink Age Pension Payment Dates 2026 | CheckPayDate.com",
     heading: "Australia Centrelink Payment Dates 2026",
+    description:
+      "Australia Centrelink Age Pension payment dates 2026. How fortnightly payments and reporting work, and where to find your personal dates.",
     canonical: "https://checkpaydate.com/australia/centrelink-payment-dates/",
     intro:
       "Centrelink Age Pension and most other Centrelink payments are made fortnightly (every 14 days). Each recipient has their own entitlement and reporting cycle, so exact payment dates are personalised — the most reliable place to see yours is your myGov-linked Centrelink account.",
@@ -140,6 +163,11 @@ export const COUNTRY_DATA = {
       "If you live outside Australia permanently, payments are usually made every 4 weeks instead of fortnightly.",
       "Public holidays can shift payment/reporting dates — Services Australia may pay early in those cases.",
       "Age Pension rates are indexed in March and September each year (next update 20 September 2026).",
+    ],
+    faqs: [
+      { q: "How often is the Age Pension paid?", a: "Fortnightly — every 14 days — on a date assigned to you by Services Australia." },
+      { q: "Where do I find my exact payment date?", a: "Log in to your myGov-linked Centrelink account or the Express Plus Centrelink app to see your next 12 weeks of dates." },
+      { q: "What about public holidays?", a: "Public holidays can shift dates; Services Australia may pay early. Banks may also deposit 1–2 days before the official payday." },
     ],
     official: {
       name: "Services Australia — Centrelink",
@@ -157,6 +185,8 @@ export const COUNTRY_DATA = {
     country: "South Africa",
     title: "South Africa SASSA Payment Dates 2026 | CheckPayDate.com",
     heading: "South Africa SASSA Payment Dates 2026",
+    description:
+      "South Africa SASSA grant payment dates 2026 for Older Persons, Disability and Child Support grants, plus current amounts.",
     canonical: "https://checkpaydate.com/south-africa/sassa-payment-dates/",
     intro:
       "The South African Social Security Agency (SASSA) pays social grants early each month, staggered over three days by grant type to reduce congestion. Once paid, money stays in your account — there is no need to withdraw it all on payday.",
@@ -175,6 +205,11 @@ export const COUNTRY_DATA = {
       { label: "Older Persons Grant (75+)", value: "R2,420" },
       { label: "Disability Grant", value: "R2,400" },
       { label: "Child Support Grant", value: "R580 per child" },
+    ],
+    faqs: [
+      { q: "When are SASSA grants paid in 2026?", a: "Grants are paid early each month, staggered by type: Older Persons around the 2nd, Disability the 3rd, and Child Support the 4th." },
+      { q: "Do I have to withdraw my money on payday?", a: "No. Your grant stays in your account until you need it — there is no need to withdraw it all on payday." },
+      { q: "When is the SRD grant paid?", a: "The Social Relief of Distress (SRD) grant is paid later in the month, typically between the 24th and 30th." },
     ],
     official: {
       name: "SASSA",
