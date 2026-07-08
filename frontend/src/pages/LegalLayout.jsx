@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ArrowLeft } from "lucide-react";
-import { CountryNav, HeaderCountryNav } from "./CountryNav";
+import { HeaderCountryNav } from "./CountryNav";
+import { SiteFooter } from "./SiteFooter";
 
 export const LegalLayout = ({ title, lastUpdated, children }) => {
   useEffect(() => {
@@ -47,20 +48,7 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-10">
-        <div className="max-w-3xl mx-auto px-4 space-y-8">
-          <CountryNav headingClass="text-slate-400" linkClass="text-slate-300 hover:text-white hover:underline font-medium" />
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm border-t border-slate-700 pt-6">
-            <span>© {new Date().getFullYear()} CheckPayDate.com. Not a Government Entity.</span>
-            <div className="flex items-center space-x-4">
-              <Link to="/privacy-policy" className="hover:text-white" data-testid="footer-privacy-link">Privacy Policy</Link>
-              <Link to="/terms-and-conditions" className="hover:text-white" data-testid="footer-terms-link">Terms</Link>
-              <Link to="/contact" className="hover:text-white" data-testid="footer-contact-link">Contact</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };
