@@ -350,10 +350,10 @@ export default function App() {
               <Calendar className="h-6 w-6" aria-hidden="true" />
             </div>
             <div>
-              <span className={`font-headings font-extrabold text-xl tracking-tight ${contrastClasses.textPrimary}`}>
+              <span className={`font-headings font-extrabold text-lg sm:text-xl tracking-tight ${contrastClasses.textPrimary}`}>
                 CheckPayDate.com
               </span>
-              <span className="block text-xs uppercase font-bold tracking-wider text-[#005EA2]">
+              <span className="hidden sm:block text-xs uppercase font-bold tracking-wider text-[#005EA2]">
                 Informational Aid
               </span>
             </div>
@@ -411,7 +411,7 @@ export default function App() {
                 height="600"
                 loading="eager"
                 decoding="async"
-                fetchpriority="high"
+                fetchPriority="high"
                 className="w-full h-auto object-contain rounded-2xl border border-slate-200 shadow-md relative z-10 bg-white aspect-square"
               />
             </div>

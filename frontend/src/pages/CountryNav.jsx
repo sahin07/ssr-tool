@@ -24,12 +24,11 @@ export const HeaderCountryNav = () => {
       <DropdownMenuTrigger asChild>
         <button
           data-testid="header-country-nav-trigger"
-          className="inline-flex items-center gap-2 h-11 px-4 border-2 border-black rounded-lg bg-white font-bold text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#005EA2]"
+          className="inline-flex items-center gap-2 h-11 px-3 sm:px-4 border-2 border-black rounded-lg bg-white font-bold text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#005EA2] shrink-0"
           aria-label="Choose a country payment date checker"
         >
           <Globe className="h-4 w-4 text-[#005EA2]" />
           <span className="hidden sm:inline">Payment Date Checkers</span>
-          <span className="sm:hidden">Countries</span>
           <ChevronDown className="h-4 w-4" />
         </button>
       </DropdownMenuTrigger>
