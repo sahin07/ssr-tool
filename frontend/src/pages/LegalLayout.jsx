@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ArrowLeft } from "lucide-react";
-import { CountryNav } from "./CountryNav";
+import { CountryNav, HeaderCountryNav } from "./CountryNav";
 
 export const LegalLayout = ({ title, lastUpdated, children }) => {
   useEffect(() => {
@@ -22,14 +22,17 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
               <span className="block text-xs uppercase font-bold tracking-wider text-[#005EA2]">Informational Aid</span>
             </div>
           </Link>
-          <Link
-            to="/"
-            data-testid="legal-back-to-tool-link"
-            className="inline-flex items-center space-x-2 text-[#005EA2] font-semibold hover:underline"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">Back to Checker</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <HeaderCountryNav />
+            <Link
+              to="/"
+              data-testid="legal-back-to-tool-link"
+              className="hidden md:inline-flex items-center space-x-2 text-[#005EA2] font-semibold hover:underline"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>Back to Checker</span>
+            </Link>
+          </div>
         </div>
       </header>
 

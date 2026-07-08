@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { CountryNav } from "@/pages/CountryNav";
+import { CountryNav, HeaderCountryNav } from "@/pages/CountryNav";
 import "@/App.css";
 import axios from "axios";
 import { 
@@ -351,6 +351,7 @@ export default function App() {
               </span>
             </div>
           </div>
+          <HeaderCountryNav />
         </div>
       </header>
 
