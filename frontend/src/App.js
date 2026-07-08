@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { CountryNav } from "@/pages/CountryNav";
 import "@/App.css";
 import axios from "axios";
 import { 
@@ -994,13 +995,7 @@ export default function App() {
           </div>
           
           <div className="space-y-3">
-            <span className="block font-bold text-xs uppercase tracking-wider text-slate-400">Information Guides</span>
-            <ul className="space-y-2 text-slate-400">
-              <li>SSI Payment Schedule Rules</li>
-              <li>Retirement Benefit Schedule Rules</li>
-              <li>Dual Eligibility Payment Schedule</li>
-              <li>Federal Holiday Adjustments</li>
-            </ul>
+            <CountryNav headingClass="text-slate-500" linkClass="text-slate-700 hover:text-[#005EA2] hover:underline font-medium" />
           </div>
 
           <div className="space-y-3">

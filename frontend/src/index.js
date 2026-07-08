@@ -7,6 +7,7 @@ import App from "@/App";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import Contact from "@/pages/Contact";
+import CountryPage from "@/pages/CountryPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +28,11 @@ root.render(
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/canada/cpp-payment-dates/*" element={<CountryPage slug="canada-cpp" />} />
+          <Route path="/canada/oas-payment-dates/*" element={<CountryPage slug="canada-oas" />} />
+          <Route path="/uk/state-pension-payment-dates/*" element={<CountryPage slug="uk-state-pension" />} />
+          <Route path="/australia/centrelink-payment-dates/*" element={<CountryPage slug="australia-centrelink" />} />
+          <Route path="/south-africa/sassa-payment-dates/*" element={<CountryPage slug="southafrica-sassa" />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

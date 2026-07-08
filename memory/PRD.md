@@ -62,6 +62,13 @@ Domain: **CheckPayDate.com**
 10. Expanded FAQ to 8 items (added: official-site clarification, no-SSN/privacy, reminder how-to).
 11. Legal pages: Privacy Policy (required), Terms & Conditions, Contact (mailto contact@checkpaydate.com). Footer links added.
 12. SEO: real <title>, meta description, canonical, Open Graph + Twitter tags. JSON-LD structured data: WebApplication + Organization + FAQPage (8 Qs). Verified present in served HTML.
+13. Multi-country expansion (June 2026): "Payment Date Checkers" country nav (🇺🇸🇨🇦🇬🇧🇦🇺🇿🇦) in homepage + legal/country footers. Country pages with specific SEO URLs:
+    - /canada/cpp-payment-dates/ and /canada/oas-payment-dates/ — 2026 monthly schedule table (identical dates). Source: canada.ca/en/services/benefits/calendar.html
+    - /uk/state-pension-payment-dates/ — interactive NI-last-2-digits → payment weekday selector + table. Source: gov.uk/state-pension/when-youre-paid, nidirect
+    - /australia/centrelink-payment-dates/ — descriptive (fortnightly, personalised via myGov; no fixed universal table by design for accuracy). Source: servicesaustralia.gov.au
+    - /south-africa/sassa-payment-dates/ — 2026/27 grant schedule table by grant type + amounts. Source: sanews.gov.za, dsd.gov.za
+    - Data lives in src/pages/countryData.js; generic renderer src/pages/CountryPage.jsx; nav src/pages/CountryNav.jsx. Each page cites official sources + disclaimer + link back to US checker.
+    - US homepage remains the primary SEO target ("Social Security Payment Date Checker").
 
 ## 8. Testing Status
 - iteration_1.json, iteration_2.json → backend 100% (12/12 pytest), frontend 100% (data-testid checks). All 3 benefit types verified against SSA rules incl. weekend/holiday backward-adjustment.
