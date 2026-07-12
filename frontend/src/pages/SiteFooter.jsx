@@ -10,6 +10,11 @@ export const SiteFooter = () => (
         <p className="text-slate-600">
           An independent, privacy-secure utility helping retirees, beneficiaries, and families plan budgets easily and clearly.
         </p>
+        <ul className="space-y-2 pt-1">
+          <li><Link to="/about" data-testid="footer-about-link" className="text-slate-700 hover:text-[#005EA2] hover:underline font-medium">About</Link></li>
+          <li><Link to="/methodology" data-testid="footer-methodology-link" className="text-slate-700 hover:text-[#005EA2] hover:underline font-medium">Methodology</Link></li>
+          <li><Link to="/changelog" data-testid="footer-changelog-link" className="text-slate-700 hover:text-[#005EA2] hover:underline font-medium">Changelog</Link></li>
+        </ul>
       </div>
 
       <div className="space-y-3">

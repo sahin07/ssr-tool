@@ -7,6 +7,9 @@ import App from "@/App";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import Contact from "@/pages/Contact";
+import Methodology from "@/pages/Methodology";
+import About from "@/pages/About";
+import Changelog from "@/pages/Changelog";
 import CountryPage from "@/pages/CountryPage";
 
 const queryClient = new QueryClient({
@@ -28,6 +31,9 @@ root.render(
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/methodology" element={<Methodology />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/changelog" element={<Changelog />} />
           <Route path="/canada/cpp-payment-dates/*" element={<CountryPage slug="canada-cpp" />} />
           <Route path="/canada/oas-payment-dates/*" element={<CountryPage slug="canada-oas" />} />
           <Route path="/uk/state-pension-payment-dates/*" element={<CountryPage slug="uk-state-pension" />} />
