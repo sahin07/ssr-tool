@@ -18,6 +18,8 @@ import {
   ChevronDown,
   RefreshCw,
   Shield,
+  ShieldCheck,
+  CalendarCheck,
   HelpCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -415,6 +417,14 @@ export default function App() {
               <CardDescription className={`${fontSizes.body}`}>
                 Enter your birth date and benefit type to check when your direct deposits or paper checks will arrive.
               </CardDescription>
+              <div data-testid="trust-updated-line" className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs sm:text-sm">
+                <span className="inline-flex items-center gap-1.5 font-semibold text-slate-700">
+                  <CalendarCheck className="h-4 w-4 text-[#005EA2]" /> Last updated: July 2026
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-700">
+                  <ShieldCheck className="h-4 w-4" /> Data verified against the official SSA payment schedule
+                </span>
+              </div>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCalculate} className="space-y-6">
@@ -974,6 +984,44 @@ export default function App() {
                   Available Monday through Friday, 8:00 AM to 7:00 PM local time. For deaf or hard of hearing, call TTY 1-800-325-0778.
                 </p>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* SOURCES */}
+          <Card className={`${contrastClasses.card} no-print`} data-testid="sources-section">
+            <CardHeader>
+              <CardTitle className={`${fontSizes.h3} flex items-center`}>
+                <Shield className="h-5 w-5 text-[#005EA2] mr-2" /> Sources
+              </CardTitle>
+              <CardDescription className={`${fontSizes.body}`}>
+                Our payment dates are based on official government schedules and rules. Verify anytime:
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  { label: "Social Security Administration (SSA)", url: "https://www.ssa.gov/pubs/EN-05-10031.pdf" },
+                  { label: "Canada.ca — Benefits payment dates", url: "https://www.canada.ca/en/services/benefits/calendar.html" },
+                  { label: "GOV.UK — State Pension", url: "https://www.gov.uk/state-pension/when-youre-paid" },
+                  { label: "Services Australia — Centrelink", url: "https://www.servicesaustralia.gov.au/" },
+                  { label: "SASSA — Social grants", url: "https://www.sassa.gov.za/" },
+                ].map((s) => (
+                  <li key={s.url}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-testid="source-link"
+                      className="inline-flex items-center text-[#005EA2] font-semibold hover:underline"
+                    >
+                      {s.label} <ExternalLink className="h-4 w-4 ml-1 shrink-0" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-slate-500 mt-4">
+                Methodology: US Social Security dates use the SSA schedule (birth day 1–10 = 2nd Wednesday, 11–20 = 3rd, 21–31 = 4th; SSI on the 1st; pre-May-1997 claims on the 3rd), with any weekend or federal holiday shifted to the prior business day.
+              </p>
             </CardContent>
           </Card>
         </section>

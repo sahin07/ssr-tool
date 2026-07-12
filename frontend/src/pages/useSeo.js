@@ -1,41 +1,52 @@
 import { useEffect } from "react";
 
-const HOME_CANONICAL = "https://checkpaydate.com/";
-
-const upsertMeta = (attr, key, content) => {
-  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement("meta");
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute("content", content);
-};
-
 // Per-page SEO: title, description, canonical, OG/Twitter, and JSON-LD.
+// Snapshots any tag it changes and restores it on unmount so client-side
+// navigation back to the homepage does not leave stale meta values.
 // Works client-side now and is picked up by react-snap prerender later.
 export function useSeo({ title, description, canonical, jsonLd }) {
   useEffect(() => {
     const prevTitle = document.title;
+    const restores = [];
+
+    const setMeta = (attr, key, content) => {
+      let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+      const created = !el;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      restores.push({ el, prev: created ? null : el.getAttribute("content"), created });
+      el.setAttribute("content", content);
+    };
+
     if (title) {
       document.title = title;
-      upsertMeta("property", "og:title", title);
-      upsertMeta("name", "twitter:title", title);
+      setMeta("property", "og:title", title);
+      setMeta("name", "twitter:title", title);
     }
     if (description) {
-      upsertMeta("name", "description", description);
-      upsertMeta("property", "og:description", description);
-      upsertMeta("name", "twitter:description", description);
+      setMeta("name", "description", description);
+      setMeta("property", "og:description", description);
+      setMeta("name", "twitter:description", description);
     }
-    let canonEl = document.head.querySelector('link[rel="canonical"]');
+
+    let canonEl = null;
+    let canonPrev = null;
+    let canonCreated = false;
     if (canonical) {
+      canonEl = document.head.querySelector('link[rel="canonical"]');
       if (!canonEl) {
+        canonCreated = true;
         canonEl = document.createElement("link");
         canonEl.setAttribute("rel", "canonical");
         document.head.appendChild(canonEl);
+      } else {
+        canonPrev = canonEl.getAttribute("href");
       }
       canonEl.setAttribute("href", canonical);
-      upsertMeta("property", "og:url", canonical);
+      setMeta("property", "og:url", canonical);
     }
 
     const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
@@ -50,8 +61,15 @@ export function useSeo({ title, description, canonical, jsonLd }) {
 
     return () => {
       document.title = prevTitle;
+      restores.forEach(({ el, prev, created }) => {
+        if (created) el.remove();
+        else if (prev !== null) el.setAttribute("content", prev);
+      });
+      if (canonEl) {
+        if (canonCreated) canonEl.remove();
+        else if (canonPrev !== null) canonEl.setAttribute("href", canonPrev);
+      }
       scripts.forEach((s) => s.remove());
-      if (canonEl) canonEl.setAttribute("href", HOME_CANONICAL);
     };
   }, [title, description, canonical, JSON.stringify(jsonLd)]);
 }
