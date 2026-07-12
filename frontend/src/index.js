@@ -11,6 +11,8 @@ import Methodology from "@/pages/Methodology";
 import About from "@/pages/About";
 import Changelog from "@/pages/Changelog";
 import PolicyPage from "@/pages/PolicyPage";
+import CountryHub from "@/pages/CountryHub";
+import SeoLanding from "@/pages/SeoLanding";
 import CountryPage from "@/pages/CountryPage";
 
 const queryClient = new QueryClient({
@@ -47,6 +49,8 @@ root.render(
           <Route path="/uk/state-pension-payment-dates/*" element={<CountryPage slug="uk-state-pension" />} />
           <Route path="/australia/centrelink-payment-dates/*" element={<CountryPage slug="australia-centrelink" />} />
           <Route path="/south-africa/sassa-payment-dates/*" element={<CountryPage slug="southafrica-sassa" />} />
+          <Route path="/payment-date-checkers" element={<CountryHub />} />
+          <Route path="/:seoSlug" element={<SeoLanding />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
