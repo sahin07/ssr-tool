@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { Toaster } from "sonner";
 
 export const LegalLayout = ({ title, lastUpdated, children }) => {
   useEffect(() => {
@@ -9,6 +10,7 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-body">
+      <Toaster position="top-center" richColors />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[#005EA2] focus:text-white focus:rounded-lg focus:font-bold"
@@ -21,9 +23,9 @@ export const LegalLayout = ({ title, lastUpdated, children }) => {
       {/* Content */}
       <main id="main-content" className="max-w-3xl mx-auto px-4 py-10 md:py-16">
         <h1 className="text-3xl sm:text-4xl font-headings font-extrabold tracking-tight mb-2">{title}</h1>
-        {lastUpdated && (
-          <p className="text-sm text-slate-500 mb-8">Last updated: {lastUpdated}</p>
-        )}
+        <p className="text-sm text-slate-500 mb-8" data-testid="page-review-line">
+          {lastUpdated ? `Last updated: ${lastUpdated} · ` : ""}Reviewed by the CheckPayDate Editorial Team
+        </p>
         <div className="prose-legal space-y-6 text-base sm:text-lg leading-relaxed text-slate-700">
           {children}
         </div>

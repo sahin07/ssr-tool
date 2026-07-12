@@ -76,6 +76,21 @@ class CalculationLog(BaseDocument):
     timestamp: dt.datetime = Field(default_factory=lambda: dt.datetime.now(dt.timezone.utc))
 
 
+class ContactMessage(BaseDocument):
+    name: str
+    email: str
+    subject: str
+    message: str
+    created_at: str = Field(default_factory=lambda: dt.datetime.now(dt.timezone.utc).isoformat())
+
+
+class ContactRequest(BaseModel):
+    name: str = Field(..., min_length=1, max_length=120)
+    email: str = Field(..., min_length=3, max_length=200)
+    subject: str = Field(..., min_length=1, max_length=200)
+    message: str = Field(..., min_length=1, max_length=4000)
+
+
 # --- API Request and Response Models ---
 class CalculateRequest(BaseModel):
     birth_date: str  # Format: YYYY-MM-DD or MM-DD or just DD
@@ -400,6 +415,25 @@ async def calculate_payment_dates(request: CalculateRequest):
         schedule=formatted_schedule,
         stats_checked=base_count + db_count
     )
+
+
+@api_router.post("/contact")
+async def submit_contact_message(request: ContactRequest):
+    """Stores a contact form submission. Does not send email."""
+    if db is None:
+        raise HTTPException(status_code=503, detail="Storage is temporarily unavailable. Please email contact@checkpaydate.com.")
+    try:
+        doc = ContactMessage(
+            name=request.name.strip(),
+            email=request.email.strip(),
+            subject=request.subject.strip(),
+            message=request.message.strip(),
+        )
+        result = await db.contact_messages.insert_one(doc.to_mongo())
+        return {"success": True, "id": str(result.inserted_id), "message": "Thanks! Your message has been received. We'll get back to you soon."}
+    except Exception as e:
+        logger.error(f"Error saving contact message: {e}")
+        raise HTTPException(status_code=500, detail="Could not send your message. Please email contact@checkpaydate.com.")
 
 
 # Include the router in the main app
